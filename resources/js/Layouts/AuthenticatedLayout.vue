@@ -63,19 +63,19 @@
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul class="space-y-2 font-medium">
                 <li>
-                    <Route text="Página inical" />
+                    <Route icon="bx bx-home" text="Página inical" :active="routeActive == NavigatorLink.HOME" />
                 </li>
                 <li>
-                    <Route link="dashboard" text="Dashboard" />
+                    <Route icon="bx bx-user" link="dashboard" text="Dashboard" :active="routeActive == NavigatorLink.DASHBORAD" />
                 </li>
                 <li>
-                    <Route link="permission.index" text="Permissões" />
+                    <Route icon="bx bx-poll" link="permission.index" text="Permissões" :active="routeActive == NavigatorLink.PERMISSION" />
                 </li>
                 <li>
-                    <Route text="Cargos" />
+                    <Route icon="bx bx-hard-hat" link="role.index" text="Cargos" :active="routeActive == NavigatorLink.ROLE "/>
                 </li>
                 <li>
-                    <Route text="Usuários" />
+                    <Route icon="bx bx-group" text="Usuários" />
                 </li>
             </ul>
         </div>
@@ -89,10 +89,18 @@
 
 </template>
 <script setup>
+
 import { usePage, Link , router} from '@inertiajs/vue3';
+import { initFlowbite } from 'flowbite';
+import { onMounted } from 'vue';
 
 import ActionsBar from '@/Components/ActionsBar.vue';
 import Route from '@/Components/Route.vue';
+import NavigatorLink from '@/Models/NavigatorLink';
+
+defineProps({
+    routeActive: {type: String, default(){ return NavigatorLink.HOME; }}
+})
 
 const page = usePage();
 
@@ -100,4 +108,7 @@ const logout = () => {
     router.post(route('logout'));
 };
 
+onMounted(() => {
+    initFlowbite();
+})
 </script>

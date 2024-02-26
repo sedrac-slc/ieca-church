@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Data\UserData;
 use App\Services\UserService;
@@ -16,6 +15,6 @@ class UserSeeder extends Seeder
     {
         $service = new UserService();
         foreach(UserData::all() as $user)
-            $service->saveOrUpdate($user);
+            $service->saveOrUpdateSeeder($user);
     }
 }

@@ -3,17 +3,13 @@
 namespace App\Data;
 
 use App\Models\User;
-use App\Enum\{Gender, MaritalStatus};
+use App\Enum\{Gender, MaritalStatus, UserEnum};
 
 class UserData{
 
-    public const ADMIN = "ADMIN";
-    public const SECRET = "SECRET";
-
-
     public static function getData($code){
         switch($code){
-            case static::ADMIN:
+            case UserEnum::ADMIN :
                 return new User([
                     User::EMAIL => "admin@ieca.com",
                     User::NUMBER_BI => "0090127LA08923",
@@ -42,8 +38,8 @@ class UserData{
 
     public static function all(){
         return [
-            static::getData(static::ADMIN),
-            static::getData(static::SECRET),
+            static::getData(UserEnum::ADMIN),
+            static::getData(UserEnum::SECRET),
         ];
     }
 

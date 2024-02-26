@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Data\PermissionData;
+use App\Services\PermissionService;
+use App\Services\UserService;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
@@ -12,6 +14,9 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $user = (new UserService())->findAdmin();
+        $permissionService = new PermissionService();
+        foreach(PermissionData::all() as $permission)
+            $permissionService->saveOrUpdateSeeder($permission,  $user);
     }
 }

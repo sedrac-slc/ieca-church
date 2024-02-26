@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
+    RoleController,
     ProfileController,
     PermissionController
 };
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
 });
 

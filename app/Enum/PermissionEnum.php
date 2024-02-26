@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Enum;
+
+class PermissionEnum{
+
+    public const PERMISSION_VIEW = "PERMISSION_VIEW";
+    public const PERMISSION_CREATE = "PERMISSION_CREATE";
+    public const PERMISSION_UPDATE = "PERMISSION_UPDATE";
+    public const PERMISSION_DELETE = "PERMISSION_DELETE";
+
+    public const PERMISSION_ROLE_VIEW = "PERMISSION_ROLE_VIEW";
+    public const PERMISSION_ROLE_CREATE = "PERMISSION_ROLE_CREATE";
+    public const PERMISSION_ROLE_UPDATE = "PERMISSION_ROLE_UPDATE";
+    public const PERMISSION_ROLE_DELETE = "PERMISSION_ROLE_DELETE";
+
+}

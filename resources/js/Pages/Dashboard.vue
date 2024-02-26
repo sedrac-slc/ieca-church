@@ -1,7 +1,5 @@
 <template>
-    <AuthenticatedLayout>
-
-
+    <AuthenticatedLayout :routeActive="NavigatorLink.DASHBORAD">
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
                 data-tabs-toggle="#default-tab-content" role="tablist">
@@ -50,14 +48,8 @@
     </AuthenticatedLayout>
 </template>
 <script setup>
-import { onMounted } from 'vue'
-import { initFlowbite } from 'flowbite'
-
 import Card from '@/Components/Card.vue';
 import FormUser from '@/Components/FormUser.vue';
+import NavigatorLink from '@/Models/NavigatorLink';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-
-onMounted(() => {
-    initFlowbite();
-})
 </script>
