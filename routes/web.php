@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\{
     RoleController,
-    ProfileController,
     PermissionController
 };
 use Illuminate\Foundation\Application;
@@ -35,9 +34,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
