@@ -1,0 +1,1 @@
+import{_ as e,N as o}from"./AuthenticatedLayout-DmWWPSpw.js";import{o as r,g as t,e as a}from"./app-DaxQkhIs.js";import"./ActionsBar-D1UjXyNn.js";const p={__name:"Role",setup(c){return(s,_)=>(r(),t(e,{routeActive:a(o).ROLE},null,8,["routeActive"]))}};export{p as default};

@@ -16,7 +16,6 @@ class BluePrintUtil{
         $table->timestamps();
         $table->text(CommonFields::VALUE_JOIN)->nullable();
         $table->uuid(CommonFields::DELETED_AT)->nullable();
-        $table->uuid(CommonFields::DELETED_AT)->nullable();
         $table->uuid(CommonFields::CREATED_BY)->nullable();
         $table->uuid(CommonFields::UPDATED_BY)->nullable();
         $table->uuid(CommonFields::DELETED_BY)->nullable();

@@ -1,7 +1,7 @@
 import './bootstrap';
 
 import 'flowbite';
-import '/node_modules/flowbite/dist/flowbite.min.js';
+import '/node_modules/flowbite/dist/flowbite.min.css';
 
 import 'boxicons';
 import '/node_modules/boxicons/css/boxicons.min.css';
