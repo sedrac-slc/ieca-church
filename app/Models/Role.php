@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Util\TableCommonFields;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -24,6 +25,14 @@ class Role extends Model
         Role::DESCRIPTION,
         Role::TYPE_SYSTEM
     ];
+
+    public static function commonFields(){
+        return new TableCommonFields(Role::TABLE);
+    }
+
+    public static function fields(string $field){
+        return Role::TABLE.SEPARATOR_POINT.$field;
+    }
 
     public function users(): BelongsToMany
     {

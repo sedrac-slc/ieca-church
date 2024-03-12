@@ -18,5 +18,8 @@ class UserRole extends Model
 
     protected $table = UserRole::TABLE;
 
+    public static function fields(string $field){
+        return UserRole::TABLE.SEPARATOR_POINT.$field;
+    }
 
 }

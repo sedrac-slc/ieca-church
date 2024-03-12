@@ -11,11 +11,13 @@ class RoleData{
     public static function getData($code){
         switch($code){
             case RoleEnum::ROLE_SUPER:
-                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Permissão total", Role::TYPE_SYSTEM => true]);
+                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Administrador de todo sistema", Role::TYPE_SYSTEM => true]);
             case RoleEnum::ROLE_USER:
-                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Gerenciar utilizadores", Role::TYPE_SYSTEM => true]);
+                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Administrador de utilizadores", Role::TYPE_SYSTEM => true]);
             case RoleEnum::ROLE_ROLE:
-                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Gerenciar cargos", Role::TYPE_SYSTEM => true]);
+                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Administrador de cargos", Role::TYPE_SYSTEM => true]);
+            case RoleEnum::ROLE_PERMISSION:
+                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Administrador de permissões", Role::TYPE_SYSTEM => true]);
             default:
                 throw new Exception("code: {$code} not found");
         }
@@ -26,6 +28,7 @@ class RoleData{
             static::getData(RoleEnum::ROLE_SUPER),
             static::getData(RoleEnum::ROLE_USER),
             static::getData(RoleEnum::ROLE_ROLE),
+            static::getData(RoleEnum::ROLE_PERMISSION),
         ];
     }
 

@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\{
     RoleController,
-    PermissionController
+    PermissionController,
+    UserController
 };
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +36,9 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('role', RoleController::class);
-    Route::resource('permission', PermissionController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
+    Route::resource('users', UserController::class);
 });
 
 require __DIR__.'/auth.php';

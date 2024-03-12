@@ -69,13 +69,13 @@
                     <Route icon="bx bx-user" link="dashboard" text="Dashboard" :active="routeActive == NavigatorLink.DASHBORAD" />
                 </li>
                 <li>
-                    <Route icon="bx bx-poll" link="permission.index" text="Permissões" :active="routeActive == NavigatorLink.PERMISSION" />
+                    <Route icon="bx bx-poll" link="permissions.index" text="Permissões" :active="routeActive == NavigatorLink.PERMISSION" />
                 </li>
                 <li>
-                    <Route icon="bx bx-hard-hat" link="role.index" text="Cargos" :active="routeActive == NavigatorLink.ROLE "/>
+                    <Route icon="bx bx-hard-hat" link="roles.index" text="Cargos" :active="routeActive == NavigatorLink.ROLE "/>
                 </li>
                 <li>
-                    <Route icon="bx bx-group" text="Usuários" />
+                    <Route icon="bx bx-group" link="users.index" text="Usuários" :active="routeActive == NavigatorLink.USER " />
                 </li>
             </ul>
         </div>

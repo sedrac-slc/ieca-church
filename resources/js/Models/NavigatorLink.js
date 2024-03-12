@@ -2,5 +2,6 @@ export default {
     HOME: "home",
     DASHBORAD: "dashboard",
     PERMISSION: "permission",
-    ROLE: "role"
+    ROLE: "role",
+    USER: "user",
 }

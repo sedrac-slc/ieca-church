@@ -1,7 +1,7 @@
 <?php
 namespace App\Enum\Concrect;
 
-final class CommonFields{
+class CommonFields{
 
     public const ID = 'id';
 

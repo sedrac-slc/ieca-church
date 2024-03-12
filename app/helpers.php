@@ -1,5 +1,14 @@
 <?php
+
+use App\Enum\Seeder\RoleEnum;
+use App\Exceptions\PermissionDeneidException;
+use App\Services\PermissionRoleService;
+use App\Services\UserRoleService;
+use Inertia\Inertia;
+use Inertia\Response;
+
 define("SEPARATOR_PIVOT","@");
+define("SEPARATOR_POINT",".");
 define("SUFIX_EMAIL_SYSTEM","@ieca.test.com");
 
 if(!function_exists("sufix_email_system")){
@@ -8,8 +17,20 @@ if(!function_exists("sufix_email_system")){
     }
 }
 
+if(!function_exists("to_render")){
+    function to_render(string $panel, array $data = []) : Response{
+
+        return Inertia::render($panel,$data);
+    }
+}
+
 if(!function_exists("permission")){
     function permission(string $permission){
-        dd($permission);
+        $userRoleService = new UserRoleService();
+        if(!$userRoleService->rolesOfAuth([RoleEnum::ROLE_SUPER])){
+            $permissionRoleService = new PermissionRoleService();
+            if(!$permissionRoleService->permissionAnyRoleOfAuth($permission))
+               throw new PermissionDeneidException();
+        }
     }
 }

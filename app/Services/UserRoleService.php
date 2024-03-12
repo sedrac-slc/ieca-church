@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enum\Concrect\CommonFields;
 use App\Models\UserRole;
+use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -25,6 +26,13 @@ class UserRoleService{
         $data[CommonFields::CREATED_BY] = $data[CommonFields::UPDATED_BY] = $user->id;
         $data[CommonFields::CREATED_AT] = $data[CommonFields::UPDATED_AT] = Carbon::now();
         UserRole::updateOrCreate($keys, $data);
+    }
+
+    public function rolesOfAuth(array $roles): bool{
+        return UserRole::join(Role::TABLE, UserRole::ROLE_ID, Role::commonFields()->id)
+        ->where(UserRole::USER_ID, auth()->user()->id)
+        ->whereIn(Role::NAME, $roles)
+        ->exists();
     }
 
 }

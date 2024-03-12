@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Enum\Concrect\CommonFields;
+use App\Models\Permission;
 use App\Models\PermissionRole;
 use App\Models\User;
+use App\Models\UserRole;
 use Carbon\Carbon;
 
 class PermissionRoleService{
@@ -25,6 +27,14 @@ class PermissionRoleService{
         $data[CommonFields::CREATED_BY] = $data[CommonFields::UPDATED_BY] = $user->id;
         $data[CommonFields::CREATED_AT] = $data[CommonFields::UPDATED_AT] = Carbon::now();
         PermissionRole::updateOrCreate($keys, $data);
+    }
+
+    public function permissionAnyRoleOfAuth(string $permission){
+        return UserRole::join(PermissionRole::TABLE, UserRole::fields(UserRole::ROLE_ID), PermissionRole::fields(PermissionRole::ROLE_ID))
+        ->join(Permission::TABLE, PermissionRole::PERMISSION_ID, Permission::commonFields()->id)
+        ->where(UserRole::fields(UserRole::USER_ID), auth()->user()->id)
+        ->where(Permission::NAME, $permission)
+        ->exists();
     }
 
 }
