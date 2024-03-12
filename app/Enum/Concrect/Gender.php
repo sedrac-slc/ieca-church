@@ -1,7 +1,7 @@
 <?php
-namespace App\Enum;
+namespace App\Enum\Concrect;
 
-class Gender{
+final class Gender{
 
     public const MALE = "MALE";
     public const FEMALE = "FEMALE";

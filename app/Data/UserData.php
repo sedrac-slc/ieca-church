@@ -2,45 +2,52 @@
 
 namespace App\Data;
 
+use App\Enum\Concrect\CreatedUserType;
+use App\Enum\Concrect\Gender;
+use App\Enum\Concrect\MaritalStatus;
+use App\Enum\Seeder\UserEnum;
 use App\Models\User;
-use App\Enum\{Gender, MaritalStatus, UserEnum};
+use Carbon\Carbon;
+use Exception;
 
-class UserData{
+final class UserData
+{
 
-    public static function getData($code){
-        switch($code){
-            case UserEnum::ADMIN :
-                return new User([
-                    User::EMAIL => "admin@ieca.com",
-                    User::NUMBER_BI => "0090127LA08923",
-                    User::FULLNAME => "Admin",
-                    User::FULLNAME_FATHER => "Admin Father",
-                    User::FULLNAME_MOTHER => "Admin Mother",
-                    User::MARITAL_STATUS => MaritalStatus::SINGLE,
-                    User::GENDER => Gender::MALE,
-                    User::BIRTHDAY => "1990-01-02",
-                    User::PASSWORD => bcrypt('12345678'),
-                ]);
+    private static function createUser($code, $bi): User{
+        return new User([
+            User::EMAIL => sufix_email_system(strtolower($code)),
+            User::NUMBER_BI => $bi,
+            User::FULLNAME => $code,
+            User::FULLNAME_FATHER => strtoupper("{$code} father"),
+            User::FULLNAME_MOTHER => strtoupper("{$code} mother"),
+            User::MARITAL_STATUS => MaritalStatus::SINGLE,
+            User::GENDER => Gender::MALE,
+            User::CREATED_USER_TYPE => CreatedUserType::SYSTEM,
+            User::BIRTHDAY => Carbon::now()->subYears(18)->format('Y-m-d'),
+            User::PASSWORD => bcrypt('12345678'),
+        ]);
+    }
+
+    public static function getData($code)
+    {
+        switch ($code) {
+            case UserEnum::SUPER:
+                return static::createUser($code, "0090127TE08923");
+            case UserEnum::USER:
+                return static::createUser($code, "0090127TE08924");
+            case UserEnum::ROLE:
+                return static::createUser($code, "0090127TE08925");
             default:
-                return new User([
-                    User::EMAIL => "secret@ieca.com",
-                    User::NUMBER_BI => "0080127LA08923",
-                    User::FULLNAME => "Secret",
-                    User::FULLNAME_FATHER => "Secret Father",
-                    User::FULLNAME_MOTHER => "Secret Mother",
-                    User::MARITAL_STATUS => MaritalStatus::SINGLE,
-                    User::GENDER => Gender::MALE,
-                    User::BIRTHDAY => "1990-01-02",
-                    User::PASSWORD => bcrypt('12345678'),
-                ]);
+                throw new Exception("code: {$code} not found");
         }
     }
 
-    public static function all(){
+    public static function all()
+    {
         return [
-            static::getData(UserEnum::ADMIN),
-            static::getData(UserEnum::SECRET),
+            static::getData(UserEnum::SUPER),
+            static::getData(UserEnum::USER),
+            static::getData(UserEnum::ROLE),
         ];
     }
-
 }

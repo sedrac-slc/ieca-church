@@ -3,13 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+use App\Enum\Concrect\Gender;
+use App\Enum\Concrect\MaritalStatus;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Notifications\Notifiable;
-use App\Enum\{Gender, MaritalStatus};
-use App\Enum\CommonFields;
 
 class User extends Authenticatable
 {
@@ -29,6 +29,7 @@ class User extends Authenticatable
     public const FULLNAME_MOTHER  = "fullname_mother";
     public const MARITAL_STATUS = "marital_status";
     public const GENDER = "gender";
+    public const CREATED_USER_TYPE = "created_type";
     public const BIRTHDAY = "birthday";
     public const PASSWORD = "password";
     public const EMAIL_VERIFIED_AT = "email_verified_at";
@@ -46,6 +47,7 @@ class User extends Authenticatable
         User::GENDER,
         User::BIRTHDAY,
         User::PASSWORD,
+        User::CREATED_USER_TYPE,
         User::EMAIL_VERIFIED_AT,
         User::REMEMBER_TOKEN,
     ];

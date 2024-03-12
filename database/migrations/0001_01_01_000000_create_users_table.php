@@ -1,9 +1,11 @@
 <?php
 
+use App\Enum\Concrect\CreatedUserType;
+use App\Enum\Concrect\Gender;
+use App\Enum\Concrect\MaritalStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enum\{Gender, MaritalStatus};
 use App\Util\BluePrintUtil;
 use App\Models\User;
 
@@ -25,7 +27,8 @@ return new class extends Migration
             $table->date(User::BIRTHDAY);
             $table->enum(User::GENDER, Gender::keys());
             $table->enum(User::MARITAL_STATUS, MaritalStatus::keys());
-            $table->timestamp('email_verified_at')->nullable();
+            $table->enum(User::CREATED_USER_TYPE, CreatedUserType::keys())->default(CreatedUserType::APPLICATION);
+            $table->timestamp(User::EMAIL_VERIFIED_AT)->nullable();
             $table->rememberToken();
             BluePrintUtil::commonFields($table);
         });

@@ -1,7 +1,7 @@
 <?php
-namespace App\Enum;
+namespace App\Enum\Concrect;
 
-class MaritalStatus{
+final class MaritalStatus{
 
     public const MARRIED = "MARRIED";
     public const SINGLE = "SINGLE";

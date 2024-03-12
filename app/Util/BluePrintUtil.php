@@ -2,8 +2,8 @@
 
 namespace App\Util;
 
+use App\Enum\Concrect\CommonFields;
 use Illuminate\Database\Schema\Blueprint;
-use App\Enum\CommonFields;
 
 
 class BluePrintUtil{

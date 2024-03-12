@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enum\Seeder;
 
-class PermissionEnum{
+final class PermissionEnum{
 
     public const PERMISSION_VIEW = "PERMISSION_VIEW";
     public const PERMISSION_CREATE = "PERMISSION_CREATE";

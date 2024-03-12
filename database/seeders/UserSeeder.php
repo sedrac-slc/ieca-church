@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $service = new UserService();
+        $userService = new UserService();
         foreach(UserData::all() as $user)
-            $service->saveOrUpdateSeeder($user);
+            $userService->saveOrUpdateSeeder($user);
     }
 }

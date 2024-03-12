@@ -2,15 +2,14 @@
 
 namespace App\Data;
 
+use App\Enum\Seeder\PermissionEnum;
 use App\Models\Permission;
-use App\Enum\PermissionEnum;
 use Exception;
 
 class PermissionData{
 
     public static function getData($code){
         switch($code){
-
             case PermissionEnum::PERMISSION_VIEW:
                 return new Permission([Permission::NAME => $code, Permission::DESCRIPTION => "Visualizar Permissões"]);
             case PermissionEnum::PERMISSION_CREATE:
