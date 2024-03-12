@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\{
+    HomeController,
     RoleController,
     PermissionController,
-    UserController
+    UserController,
 };
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Inertia\Inertia;
 
@@ -21,20 +20,13 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name("home");
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', User::getSelects());
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [HomeController::class, 'home'])->name("home");
+Route::get('/dashboard', [HomeController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/permission-deneid', [HomeController::class, 'permissionDeneid'])->name("permission-deneid");
 
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);

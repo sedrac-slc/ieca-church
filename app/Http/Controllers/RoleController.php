@@ -2,34 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\PermissionDeneidException;
+use Illuminate\Http\RedirectResponse;
 use App\Enum\Seeder\PermissionEnum;
 use App\Http\Requests\RoleRequest;
 use App\Models\Role;
-use Illuminate\Http\RedirectResponse;
-use Inertia\{ Response, Inertia };
 
 class RoleController extends Controller
 {
-    public function index(): Response{
-        permission(PermissionEnum::PERMISSION_ROLE_VIEW);
-        return to_render('View/Role',[
-            'roles' => Role::all()
-        ]);
+    public function index(){
+        try{
+            permission(PermissionEnum::PERMISSION_ROLE_VIEW);
+            return to_render('View/Role',[ 'roles' => Role::all()]);
+        }catch(PermissionDeneidException){
+            return to_permission_deneid(PermissionEnum::PERMISSION_ROLE_VIEW);
+        }
     }
 
     public function store(RoleRequest $request): RedirectResponse{
-        permission(PermissionEnum::PERMISSION_ROLE_CREATE);
-        return to_route('roles.index');
+        try{
+            permission(PermissionEnum::PERMISSION_ROLE_CREATE);
+            return to_route('roles.index');
+        }catch(PermissionDeneidException){
+            return to_permission_deneid(PermissionEnum::PERMISSION_ROLE_CREATE);
+        }
     }
 
     public function update(RoleRequest $request, $id): RedirectResponse{
-        permission(PermissionEnum::PERMISSION_ROLE_UPDATE);
-        return to_route('roles.index');
+        try{
+            permission(PermissionEnum::PERMISSION_ROLE_UPDATE);
+            return to_route('roles.index');
+        }catch(PermissionDeneidException){
+            return to_permission_deneid(PermissionEnum::PERMISSION_ROLE_UPDATE);
+        }
     }
 
     public function delete($id): RedirectResponse{
-        permission(PermissionEnum::PERMISSION_ROLE_DELETE);
-        return to_route('roles.index');
+        try{
+            permission(PermissionEnum::PERMISSION_ROLE_DELETE);
+            return to_route('roles.index');
+        }catch(PermissionDeneidException){
+            return to_permission_deneid(PermissionEnum::PERMISSION_ROLE_DELETE);
+        }
     }
 
 }

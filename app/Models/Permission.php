@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Util\TableCommonFields;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +23,7 @@ class Permission extends Model
     ];
 
     public static function commonFields(){
-        return new TableCommonFields(Permission::TABLE);
+        return commonFields(Permission::TABLE);
     }
 
     public static function fields(string $field){

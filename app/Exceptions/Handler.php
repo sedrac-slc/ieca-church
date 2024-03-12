@@ -23,8 +23,13 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+        $this->reportable(function (PermissionDeneidException $e) {
+            return redirect()->route('users.index');
+        });
+
         $this->reportable(function (Throwable $e) {
             //
         });
+
     }
 }

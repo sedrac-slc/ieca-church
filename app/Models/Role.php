@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Util\TableCommonFields;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -27,7 +26,7 @@ class Role extends Model
     ];
 
     public static function commonFields(){
-        return new TableCommonFields(Role::TABLE);
+        return commonFields(Role::TABLE);
     }
 
     public static function fields(string $field){
