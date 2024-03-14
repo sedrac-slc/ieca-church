@@ -5,11 +5,11 @@
             @update="person.fullname = $event"/>
         </div>
         <div>
-            <InputEmail :required="true" :value="person.email" @update="person.email = $event"/>
+            <InputEmail name="email" :required="true" :value="person.email" @update="person.email = $event"/>
         </div>
         <div>
-            <InputText :required="true" text="Digita seu bilhete de identidade" name="number_bi" icon="bx bx-credit-card-alt" :value="person.number_bi"
-            @update="person.number_bi = $event"/>
+            <InputText :required="true" text="Digita seu bilhete de identidade" name="identity_card" icon="bx bx-credit-card-alt" :value="person.identity_card"
+            @update="person.identity_card = $event"/>
         </div>
         <div>
             <InputDate :required="true" text="Digita sua data de nascimento" name="birthday" :value="person.birthday"
@@ -22,22 +22,27 @@
         <div>
             <Select :options="maritalStatus" text="Escolha o seu estado cívil" name="marital_status" icon="bx bx-circle" :required="true" :value="person.marital_status"
             @update="person.marital_status = $event"/>
+
         </div>
         <div>
             <InputText :required="true" text="Digita seu nome completo do pai" name="fullname_father" icon="bx bx-male" :value="person.fullname_father"
             @update="person.fullname_father = $event"/>
+
         </div>
         <div>
             <InputText :required="true" text="Digita seu nome completo da mãe" name="fullname_mother" icon="bx bx-female" :value="person.fullname_mother"
             @update="person.fullname_mother = $event"/>
+
         </div>
         <template v-if="passwordVisible">
             <div>
-                <InputPassword :required="true"  @update="person.password = $event" />
+                <InputPassword :required="true"  @update="person.password = $event" :value="person.password" />
+
             </div>
             <div>
                 <InputPassword :required="true" text="Confirma a senha" name="password_confirmation" icon="bx bxs-key"
-                @update="person.password_confirmation = $event" />
+                @update="person.password_confirmation = $event" :value="person.password_confirmation"/>
+
             </div>
         </template>
     </div>
@@ -53,6 +58,7 @@ import InputEmail from '@/Components/InputEmail.vue';
 import InputPassword from '@/Components/InputPassword.vue';
 import selects from '@/Parser/select';
 import Person from '@/Models/Person';
+import { onErrorCaptured } from 'vue';
 
 defineProps({
     passwordVisible: { type: Boolean, default() { return true } },
@@ -63,5 +69,15 @@ const page = usePage();
 
 const genders = selects(page.props.genders, page.props.separator);
 const maritalStatus = selects(page.props.maritalStatus, page.props.separator);
+
+onErrorCaptured((error) => {
+  console.log('Error:', error); // Log the entire error response
+
+  // You can access specific errors here:
+  if (error.response.data.errors) {
+    const emailError = error.response.data.errors.email; // Assuming email is the error key
+    console.log('Email error:', emailError);
+  }
+});
 
 </script>

@@ -1,13 +1,12 @@
 <?php
 
+use App\Enum\Concrect\RouteNavigator;
 use App\Http\Controllers\{
     HomeController,
     RoleController,
     PermissionController,
     UserController,
 };
-use App\Models\User;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,14 +22,14 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'home'])->name("home");
 Route::get('/dashboard', [HomeController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name(RouteNavigator::DASHBOARD);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/permission-deneid', [HomeController::class, 'permissionDeneid'])->name("permission-deneid");
+    Route::get('/permission-deneid', [HomeController::class, 'permissionDeneid'])->name(RouteNavigator::PERMISSION_DENEID);
 
-    Route::resource('roles', RoleController::class);
-    Route::resource('permissions', PermissionController::class);
-    Route::resource('users', UserController::class);
+    Route::resource(RouteNavigator::ROLES, RoleController::class);
+    Route::resource(RouteNavigator::PERMISSIONS, PermissionController::class);
+    Route::resource(RouteNavigator::USERS, UserController::class);
 });
 
 require __DIR__.'/auth.php';

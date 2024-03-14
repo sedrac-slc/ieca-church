@@ -1,6 +1,6 @@
 <template>
     <AuthenticatedLayout :routeActive="NavigatorLink.ROLE">
-        <Table>
+        <Table :pagination="roles">
 
             <template #thead>
               <TheadTR>
@@ -10,7 +10,7 @@
             </template>
 
             <template #tbody>
-              <TBodyTR v-for="role in roles" :key="role.id">
+              <TBodyTR v-for="role in roles.data" :key="role.id">
                 <TableTD :text="role.name" />
                 <TableTD :text="role.description" />
               </TBodyTR>

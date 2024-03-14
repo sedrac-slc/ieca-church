@@ -23,7 +23,7 @@ class User extends Authenticatable
     public const TABLE = "users";
 
     public const EMAIL = "email";
-    public const NUMBER_BI = "number_bi";
+    public const IDENTITY_CARD = "identity_card";
     public const FULLNAME = "fullname";
     public const FULLNAME_FATHER = "fullname_father";
     public const FULLNAME_MOTHER  = "fullname_mother";
@@ -35,11 +35,13 @@ class User extends Authenticatable
     public const EMAIL_VERIFIED_AT = "email_verified_at";
     public const REMEMBER_TOKEN = "remember_token";
 
+    public const PASSWORD_CONFIRMATION = "password_confirmation";
+
     protected $table = User::TABLE;
 
     protected $fillable = [
         User::EMAIL,
-        User::NUMBER_BI,
+        User::IDENTITY_CARD,
         User::FULLNAME,
         User::FULLNAME_FATHER,
         User::FULLNAME_MOTHER,

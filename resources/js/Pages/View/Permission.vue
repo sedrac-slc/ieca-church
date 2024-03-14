@@ -1,6 +1,6 @@
 <template>
   <AuthenticatedLayout :routeActive="NavigatorLink.PERMISSION">
-    <Table>
+    <Table :pagination="permissions">
 
       <template #thead>
         <TheadTR>
@@ -10,7 +10,7 @@
       </template>
 
       <template #tbody>
-        <TBodyTR v-for="permission in permissions" :key="permission.id">
+        <TBodyTR v-for="permission in permissions.data" :key="permission.id">
           <TableTD :text="permission.name" />
           <TableTD :text="permission.description" />
         </TBodyTR>

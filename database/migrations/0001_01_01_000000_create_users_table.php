@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string(User::FULLNAME);
             $table->string(User::FULLNAME_FATHER);
             $table->string(User::FULLNAME_MOTHER);
-            $table->string(User::NUMBER_BI)->unique();
+            $table->string(User::IDENTITY_CARD)->unique();
             $table->string(User::PASSWORD);
             $table->date(User::BIRTHDAY);
             $table->enum(User::GENDER, Gender::keys());

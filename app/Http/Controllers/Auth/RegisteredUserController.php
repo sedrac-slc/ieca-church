@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\UserPostRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -29,20 +30,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(UserPostRequest $request): RedirectResponse
     {
-        $request->validate([
-            User::FULLNAME => 'required|string|max:255',
-            User::FULLNAME_FATHER => 'required|string|max:255',
-            User::FULLNAME_MOTHER => 'required|string|max:255',
-            User::EMAIL => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            User::NUMBER_BI => 'required|string|max:255|unique:'.User::class,
-            User::PASSWORD => ['required', 'confirmed', Rules\Password::defaults()],
-            User::MARITAL_STATUS => 'required|string|max:255',
-            User::GENDER => 'required|string|max:255',
-            User::BIRTHDAY => 'required|date' ,
-        ]);
-
         $data = $request->all();
 
         $data[User::PASSWORD] = Hash::make($request->password);

@@ -16,7 +16,7 @@ final class UserData
     private static function createUser($code, $bi): User{
         return new User([
             User::EMAIL => sufix_email_system(strtolower($code)),
-            User::NUMBER_BI => $bi,
+            User::IDENTITY_CARD => $bi,
             User::FULLNAME => $code,
             User::FULLNAME_FATHER => strtoupper("{$code} father"),
             User::FULLNAME_MOTHER => strtoupper("{$code} mother"),

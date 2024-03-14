@@ -4,6 +4,7 @@ use App\Enum\Seeder\RoleEnum;
 use App\Exceptions\PermissionDeneidException;
 use App\Services\PermissionRoleService;
 use App\Enum\Concrect\CommonFields;
+use App\Enum\Concrect\RouteNavigator;
 use App\Services\UserRoleService;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -11,6 +12,17 @@ use Inertia\Response;
 define("SEPARATOR_PIVOT","@");
 define("SEPARATOR_POINT",".");
 define("SUFIX_EMAIL_SYSTEM","@ieca.test.com");
+
+if(!function_exists("permission")){
+    function permission(string $permission){
+        $userRoleService = new UserRoleService();
+        if(!$userRoleService->rolesOfAuth([RoleEnum::ROLE_SUPER])){
+            $permissionRoleService = new PermissionRoleService();
+            if(!$permissionRoleService->permissionAnyRoleOfAuth($permission))
+               throw new PermissionDeneidException();
+        }
+    }
+}
 
 if(!function_exists("sufix_email_system")){
     function sufix_email_system(string $email) : string{
@@ -21,6 +33,12 @@ if(!function_exists("sufix_email_system")){
 if(!function_exists('commonFields')){
     function commonFields(string $table){
         return new CommonFields($table);
+    }
+}
+
+if(!function_exists('navigator')){
+    function navigator(string $table){
+        return new RouteNavigator($table);
     }
 }
 
@@ -36,13 +54,3 @@ if(!function_exists("to_permission_deneid")){
     }
 }
 
-if(!function_exists("permission")){
-    function permission(string $permission){
-        $userRoleService = new UserRoleService();
-        if(!$userRoleService->rolesOfAuth([RoleEnum::ROLE_SUPER])){
-            $permissionRoleService = new PermissionRoleService();
-            if(!$permissionRoleService->permissionAnyRoleOfAuth($permission))
-               throw new PermissionDeneidException();
-        }
-    }
-}
