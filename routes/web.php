@@ -26,6 +26,7 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])
 
 Route::middleware('auth')->group(function () {
     Route::get('/permission-deneid', [HomeController::class, 'permissionDeneid'])->name(RouteNavigator::PERMISSION_DENEID);
+    Route::get('/not-found', [HomeController::class, 'notFound'])->name(RouteNavigator::NOT_FOUND);
 
     Route::resource(RouteNavigator::ROLES, RoleController::class);
     Route::resource(RouteNavigator::PERMISSIONS, PermissionController::class);

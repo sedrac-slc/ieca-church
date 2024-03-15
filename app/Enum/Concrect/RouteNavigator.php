@@ -5,6 +5,7 @@ class RouteNavigator{
 
     public const DASHBOARD = 'dashboard';
     public const PERMISSION_DENEID = 'permission-deneid';
+    public const NOT_FOUND = 'not-found';
 
     public const ROLES = 'roles';
     public const PERMISSIONS = 'permissions';

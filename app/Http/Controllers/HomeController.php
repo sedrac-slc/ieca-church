@@ -29,4 +29,8 @@ class HomeController extends Controller
         return Inertia::render('PermissionDenied');
     }
 
+    function notFound(){
+        return Inertia::render('NotFound');
+    }
+
 }

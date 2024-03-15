@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Enum\Concrect\RouteNavigator;
 use App\Enum\Seeder\PermissionEnum;
-use Illuminate\Http\RedirectResponse;
+use App\Exceptions\NotFoundException;
 use App\Exceptions\PermissionDeneidException;
 use App\Http\Requests\Post\UserPostRequest;
 use App\Http\Requests\Put\UserPutRequest;
 use App\Models\User;
 use App\Services\UserService;
-use Exception;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller{
 
@@ -43,21 +43,28 @@ class UserController extends Controller{
         }
     }
 
-    public function update(UserPutRequest $request, $id): RedirectResponse{
+    public function update(UserPutRequest $request, string $id): RedirectResponse{
         try{
             permission(PermissionEnum::PERMISSION_USER_UPDATE);
+            $this->userService->update($request, $id);
             return to_route($this->route->index);
         }catch(PermissionDeneidException){
             return to_permission_deneid(PermissionEnum::PERMISSION_USER_UPDATE);
+        }catch(NotFoundException){
+            return to_not_found();
         }
     }
 
     public function delete($id): RedirectResponse{
         try{
             permission(PermissionEnum::PERMISSION_USER_DELETE);
+            $this->userService->delete($id);
             return to_route($this->route->index);
         }catch(PermissionDeneidException){
             return to_permission_deneid(PermissionEnum::PERMISSION_USER_DELETE);
+        }catch(NotFoundException){
+            return to_not_found();
         }
     }
+
 }

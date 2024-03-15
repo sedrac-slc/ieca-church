@@ -50,7 +50,13 @@ if(!function_exists("to_render")){
 
 if(!function_exists("to_permission_deneid")){
     function to_permission_deneid(string $panel){
-        return to_route('permission-deneid');
+        return to_route(RouteNavigator::PERMISSION_DENEID);
+    }
+}
+
+if(!function_exists("to_not_found")){
+    function to_not_found(string $panel = ""){
+        return to_route(RouteNavigator::NOT_FOUND);
     }
 }
 

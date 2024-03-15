@@ -1,7 +1,7 @@
 <template>
   <AuthenticatedLayout :routeActive="NavigatorLink.USER">
 
-    <ButtonCreate :modal="modal" />
+    <ButtonCreate :modal="modal" @click="title=Operation.CREATE; passwordVisible = true;  disabled = false; form = Person;"/>
 
     <Table :pagination="users">
       <template #thead>
@@ -14,6 +14,7 @@
           <TableTH icon="bx bx-chat" text="Data nascimento" />
           <TableTH icon="bx bx-chat" text="Gênero" />
           <TableTH icon="bx bx-chat" text="Estado Cívil" />
+          <TableTH icon="bx bx-tools" text="Acções" colspan="2"/>
         </TheadTR>
       </template>
 
@@ -27,12 +28,18 @@
           <TableTD :text="user.birthday" />
           <TableTD :text="user.gender" />
           <TableTD :text="user.marital_status" />
+          <td>
+            <ButtonEdit :modal="modal" @click="title=Operation.EDIT; passwordVisible = false; disabled = false; form = user;" />
+          </td>
+          <td>
+            <ButtonDelete :modal="modal" @click="title=Operation.DELETE; passwordVisible = false; disabled = true; form = user;"/>
+          </td>
         </TBodyTR>
       </template>
     </Table>
 
-    <ModalPersistence :modal="modal" @submitted="submit()">
-        <FormUser :person="form" />
+    <ModalPersistence :modal="modal" @submitted="submit()" :title="title">
+        <FormUser :person="form" :passwordVisible="passwordVisible" :disabled="disabled"/>
     </ModalPersistence>
 
   </AuthenticatedLayout>
@@ -50,19 +57,39 @@ import TBodyTR from "@/Slots/TBodyTR.vue";
 import TableTH from "@/Components/TableTH.vue";
 import TableTD from "@/Components/TableTD.vue";
 import FormUser from "@/Components/FormUser.vue";
+import ButtonEdit from "@/Components/ButtonEdit.vue";
+import ButtonDelete from "@/Components/ButtonDelete.vue";
 import ButtonCreate from "@/Components/ButtonCreate.vue";
 import ModalPersistence from "@/Slots/ModalPersistence.vue";
-import {UserTest} from '@/Models/Person';
+import Operation from '@/Models/Operation';
+import Person from '@/Models/Person';
 
-const form = useForm(UserTest);
 defineProps(["users"]);
 
+const form = useForm(Person);
+const title = ref(Operation.CREATE)
+const disabled = ref(false)
+const passwordVisible = ref(true)
 const modal = ref("user-modal")
 
 const submit = () => {
-    form.post(route('users.store'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
-    });
+    switch(title.value){
+        case Operation.CREATE:
+            form.post(route('users.store'), {
+                onFinish: () => form.reset('password', 'password_confirmation'),
+            });
+        break;
+        case Operation.EDIT:
+            form.put(route('users.update', form.id), {
+                onFinish: () => form.reset('password', 'password_confirmation'),
+            });
+        break;
+        case Operation.DELETE:
+            form.delete(route('users.delete', form.id), {
+                onFinish: () => form.reset('password', 'password_confirmation'),
+            });
+        break;
+    }
 };
 
 </script>
