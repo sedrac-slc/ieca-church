@@ -8,6 +8,7 @@ use App\Exceptions\NotFoundException;
 use App\Http\Requests\Post\UserPostRequest;
 use App\Http\Requests\Put\UserPutRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserService{
 
@@ -18,12 +19,25 @@ class UserService{
     }
 
     public function save(UserPostRequest $request){
-        User::create($request->all());
+        $data = $request->all();
+        $data[User::PASSWORD] = bcrypt($data[User::PASSWORD]);
+        User::create(store($data));
     }
 
-    public function update(UserPutRequest $request,string $id){
-        $user = $this->findById($id);
-        $user->update($request->all());
+    public function update(UserPutRequest $request){
+        $data = $request->all();
+        $user = $this->findById($request->id);
+
+        $user->update(modify([
+            User::EMAIL => $data[User::EMAIL],
+            User::IDENTITY_CARD => $data[User::IDENTITY_CARD],
+            User::FULLNAME => $data[User::FULLNAME],
+            User::FULLNAME_FATHER => $data[User::FULLNAME_FATHER],
+            User::FULLNAME_MOTHER => $data[User::FULLNAME_MOTHER],
+            User::MARITAL_STATUS => $data[User::MARITAL_STATUS],
+            User::GENDER => $data[User::GENDER],
+            User::BIRTHDAY => $data[User::BIRTHDAY],
+        ]));
     }
 
     public function delete(string $id){

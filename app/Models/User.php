@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Notifications\Notifiable;
+use App\Enum\Concrect\CommonFields;
 
 class User extends Authenticatable
 {
@@ -63,6 +64,10 @@ class User extends Authenticatable
         User::PASSWORD,
         User::REMEMBER_TOKEN,
     ];
+
+    function __construct(){
+        $this->fillable = array_merge($this->fillable, CommonFields::FIELDS);
+    }
 
     /**
      * Get the attributes that should be cast.

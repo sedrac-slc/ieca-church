@@ -33,4 +33,8 @@ class HomeController extends Controller
         return Inertia::render('NotFound');
     }
 
+    function exception(){
+        return Inertia::render('Exception');
+    }
+
 }

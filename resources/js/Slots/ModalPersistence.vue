@@ -17,7 +17,7 @@
                 <div class="p-4 md:p-5">
                     <form class="space-y-4" @submit.prevent="$emit('submitted')">
                         <slot />
-                        <button type="submit" class="mt-3 px-3 py-2 text-xs font-medium text-center text-white bg-pink-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">
+                        <button  type="submit" class="mt-3 px-3 py-2 text-xs font-medium text-center text-white bg-pink-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">
                             <i class="bx bx-check"></i>
                             <span>{{btnConfirmText}}</span>
                         </button>

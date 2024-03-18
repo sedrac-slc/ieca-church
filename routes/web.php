@@ -25,12 +25,14 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])
     ->name(RouteNavigator::DASHBOARD);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/permission-deneid', [HomeController::class, 'permissionDeneid'])->name(RouteNavigator::PERMISSION_DENEID);
-    Route::get('/not-found', [HomeController::class, 'notFound'])->name(RouteNavigator::NOT_FOUND);
 
     Route::resource(RouteNavigator::ROLES, RoleController::class);
     Route::resource(RouteNavigator::PERMISSIONS, PermissionController::class);
-    Route::resource(RouteNavigator::USERS, UserController::class);
+
+    Route::get(RouteNavigator::USERS,[UserController::class, 'index'])->name(navigator(RouteNavigator::USERS)->index);
+    Route::post(RouteNavigator::USERS,[UserController::class, 'store'])->name(navigator(RouteNavigator::USERS)->store);
+    Route::put(RouteNavigator::USERS,[UserController::class, 'update'])->name(navigator(RouteNavigator::USERS)->update);
+    Route::delete(RouteNavigator::USERS,[UserController::class, 'delete'])->name(navigator(RouteNavigator::USERS)->delete);
 });
 
 require __DIR__.'/auth.php';

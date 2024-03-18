@@ -15,7 +15,7 @@ class CommonFields{
     public const UPDATED_BY = 'updated_by';
     public const DELETED_BY = 'deleted_by';
 
-    private const FIELDS = [
+    public const FIELDS = [
         CommonFields::ID,
         CommonFields::UPDATED_AT,
         CommonFields::CREATED_AT,

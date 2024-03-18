@@ -11,6 +11,8 @@ use App\Http\Requests\Put\UserPutRequest;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Database\UniqueConstraintViolationException;
 
 class UserController extends Controller{
 
@@ -22,14 +24,18 @@ class UserController extends Controller{
         $this->userService  = new UserService();
     }
 
+    private function render($dt = []){
+        $data = User::getSelects();
+        $data["users"] = User::paginate();
+        return to_render('View/User',array_merge($data, $dt));
+    }
+
     public function index(){
         try{
             permission(PermissionEnum::PERMISSION_USER_VIEW);
-            $data = User::getSelects();
-            $data["users"] = User::paginate();
-            return to_render('View/User',$data);
+            return $this->render();
         }catch(PermissionDeneidException){
-            return to_permission_deneid(PermissionEnum::PERMISSION_USER_VIEW);
+            return to_route($this->route->index);
         }
     }
 
@@ -39,19 +45,21 @@ class UserController extends Controller{
             $this->userService->save($request);
             return to_route($this->route->index);
         }catch(PermissionDeneidException){
-            return to_permission_deneid(PermissionEnum::PERMISSION_USER_CREATE);
+            return to_route($this->route->index);
         }
     }
 
-    public function update(UserPutRequest $request, string $id): RedirectResponse{
+    public function update(UserPutRequest $request){
         try{
             permission(PermissionEnum::PERMISSION_USER_UPDATE);
-            $this->userService->update($request, $id);
+            $this->userService->update($request);
             return to_route($this->route->index);
         }catch(PermissionDeneidException){
-            return to_permission_deneid(PermissionEnum::PERMISSION_USER_UPDATE);
+            return to_route($this->route->index);
+        }catch(UniqueConstraintViolationException){
+            return to_route($this->route->index, ["" ]);
         }catch(NotFoundException){
-            return to_not_found();
+            return to_route($this->route->index);
         }
     }
 
@@ -61,9 +69,9 @@ class UserController extends Controller{
             $this->userService->delete($id);
             return to_route($this->route->index);
         }catch(PermissionDeneidException){
-            return to_permission_deneid(PermissionEnum::PERMISSION_USER_DELETE);
+            return to_route($this->route->index);
         }catch(NotFoundException){
-            return to_not_found();
+            return to_route($this->route->index);
         }
     }
 

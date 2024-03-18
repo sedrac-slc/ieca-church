@@ -1,5 +1,5 @@
 <template>
-    <label :for="name" class="block mb-2 text-sm font-medium text-red-900 dark:text-white">
+    <label :for="name" class="block mb-2 text-sm font-medium text-red-900 dark:text-white" v-if="text != '' ">
         <i class="bx bx-error text-pink-500"></i>
         <span>{{ text }}</span>
     </label>
@@ -7,6 +7,6 @@
 <script setup>
 defineProps({
     name: {type: String, default(){ return ""; } },
-    text: {type: String, default(){ return "Erro"; } },
+    text: {type: String, default(){ return ""; } },
 })
 </script>

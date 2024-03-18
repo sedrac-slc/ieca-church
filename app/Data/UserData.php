@@ -17,7 +17,7 @@ final class UserData
         return new User([
             User::EMAIL => sufix_email_system(strtolower($code)),
             User::IDENTITY_CARD => $bi,
-            User::FULLNAME => $code,
+            User::FULLNAME => "{$code}".SUFIX_FULLNAME,
             User::FULLNAME_FATHER => strtoupper("{$code} father"),
             User::FULLNAME_MOTHER => strtoupper("{$code} mother"),
             User::MARITAL_STATUS => MaritalStatus::SINGLE,

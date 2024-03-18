@@ -1,4 +1,5 @@
 export default {
+    id: "",
     fullname: "",
     fullname_father: "",
     fullname_mother: "",
@@ -10,8 +11,9 @@ export default {
     password: "",
     password_confirmation: ""
 }
-
-export let UserTest = {
+/*
+export default {
+    id: "",
     fullname: "Paulo Miguel",
     fullname_father: "João Miguel",
     fullname_mother: "Maria Lucas",
@@ -23,3 +25,4 @@ export let UserTest = {
     password: "12345678",
     password_confirmation: "12345678"
 }
+*/

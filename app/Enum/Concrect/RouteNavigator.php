@@ -10,13 +10,14 @@ class RouteNavigator{
     public const ROLES = 'roles';
     public const PERMISSIONS = 'permissions';
     public const USERS = 'users';
+    public const EXCEPTION = 'exception';
 
     private string $route;
 
     private string $index;
     private string $show;
     private string $edit;
-    private string $create;
+    private string $store;
     private string $update;
     private string $delete;
 
@@ -26,7 +27,7 @@ class RouteNavigator{
             $this->index = $route . ".index";
             $this->show = $route . ".show";
             $this->edit = $route . ".edit";
-            $this->create = $route . ".create";
+            $this->store = $route . ".store";
             $this->update = $route . ".update";
             $this->delete = $route . ".delete";
         }

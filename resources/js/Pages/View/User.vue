@@ -1,7 +1,7 @@
 <template>
   <AuthenticatedLayout :routeActive="NavigatorLink.USER">
 
-    <ButtonCreate :modal="modal" @click="title=Operation.CREATE; passwordVisible = true;  disabled = false; form = Person;"/>
+    <ButtonCreate :modal="modalName" @click="action(Operation.CREATE,true,false,Person);"/>
 
     <Table :pagination="users">
       <template #thead>
@@ -23,23 +23,23 @@
           <TableTD :text="user.fullname" />
           <TableTD :text="user.fullname_father" />
           <TableTD :text="user.fullname_mother" />
-          <TableTD :text="user.number_bi" />
+          <TableTD :text="user.identity_card" />
           <TableTD :text="user.email" />
           <TableTD :text="user.birthday" />
           <TableTD :text="user.gender" />
           <TableTD :text="user.marital_status" />
           <td>
-            <ButtonEdit :modal="modal" @click="title=Operation.EDIT; passwordVisible = false; disabled = false; form = user;" />
+            <ButtonEdit :modal="modalName" @click="action(Operation.EDIT,false,false,user)" />
           </td>
           <td>
-            <ButtonDelete :modal="modal" @click="title=Operation.DELETE; passwordVisible = false; disabled = true; form = user;"/>
+            <ButtonDelete :modal="modalName" @click="action(Operation.DELETE,false,true,user)"/>
           </td>
         </TBodyTR>
       </template>
     </Table>
 
-    <ModalPersistence :modal="modal" @submitted="submit()" :title="title">
-        <FormUser :person="form" :passwordVisible="passwordVisible" :disabled="disabled"/>
+    <ModalPersistence :modal="modalName" @submitted="submit()" :title="title">
+        <FormUser :person="form" :passwordVisible="passwordVisible" :disabled="disabled" :errors="errors"/>
     </ModalPersistence>
 
   </AuthenticatedLayout>
@@ -48,6 +48,7 @@
 
 import { ref } from "vue";
 import { useForm } from '@inertiajs/vue3';
+import { Modal } from 'flowbite';
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import NavigatorLink from "@/Models/NavigatorLink";
@@ -64,15 +65,40 @@ import ModalPersistence from "@/Slots/ModalPersistence.vue";
 import Operation from '@/Models/Operation';
 import Person from '@/Models/Person';
 
-defineProps(["users"]);
+const props = defineProps(["users", "errors"]);
 
 const form = useForm(Person);
 const title = ref(Operation.CREATE)
 const disabled = ref(false)
 const passwordVisible = ref(true)
-const modal = ref("user-modal")
+const modalName = ref("user-modal")
+const modalEl = document.getElementById(`${modalName.value}`)
+//const modal = new Modal(modalEl);
+
+const attribute = (form, user) => {
+    form.id = user.id
+    form.fullname = user.fullname
+    form.fullname_father = user.fullname_father
+    form.fullname_mother = user.fullname_mother
+    form.birthday = user.birthday
+    form.identity_card = user.identity_card
+    form.email = user.email
+    form.gender = user.gender
+    form.marital_status = user.marital_status
+}
+
+const action = (operation, visible, desactive, user) => {
+    attribute(props.errors, Person);
+
+    title.value= operation;
+    passwordVisible.value = visible;
+    disabled.value = desactive;
+
+    attribute(form, user);
+}
 
 const submit = () => {
+
     switch(title.value){
         case Operation.CREATE:
             form.post(route('users.store'), {
@@ -80,14 +106,10 @@ const submit = () => {
             });
         break;
         case Operation.EDIT:
-            form.put(route('users.update', form.id), {
-                onFinish: () => form.reset('password', 'password_confirmation'),
-            });
+           form.put(route('users.update'),{  });
         break;
         case Operation.DELETE:
-            form.delete(route('users.delete', form.id), {
-                onFinish: () => form.reset('password', 'password_confirmation'),
-            });
+            form.delete(route('users.delete', { user: form.id}));
         break;
     }
 };
