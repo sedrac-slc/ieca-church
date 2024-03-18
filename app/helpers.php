@@ -58,7 +58,6 @@ if(!function_exists('store')){
     }
 }
 
-
 if(!function_exists('navigator')){
     function navigator(string $table){
         return new RouteNavigator($table);
@@ -68,24 +67,6 @@ if(!function_exists('navigator')){
 if(!function_exists("to_render")){
     function to_render(string $panel, array $data = []) : Response{
         return Inertia::render($panel,$data);
-    }
-}
-
-if(!function_exists("to_permission_deneid")){
-    function to_permission_deneid(string $panel){
-        return to_route(RouteNavigator::PERMISSION_DENEID);
-    }
-}
-
-if(!function_exists("to_exception")){
-    function to_exception(Exception $panel){
-        return to_route(RouteNavigator::EXCEPTION);
-    }
-}
-
-if(!function_exists("to_not_found")){
-    function to_not_found(string $panel = ""){
-        return to_route(RouteNavigator::NOT_FOUND);
     }
 }
 

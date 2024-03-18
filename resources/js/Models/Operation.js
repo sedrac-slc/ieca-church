@@ -1,5 +1,5 @@
 export default {
     CREATE: "Adicionar",
-    EDIT: "Edit",
+    EDIT: "Editar",
     DELETE: "Eliminar",
 }

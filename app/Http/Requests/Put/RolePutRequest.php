@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Put;
 
 use App\Enum\Concrect\CommonFields;
+use App\Http\Requests\Post\RolePostRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteRequest extends FormRequest
+class RolePutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +23,8 @@ class DeleteRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            CommonFields::ID => ['required']
-        ];
+        $data = (new RolePostRequest())->rules();
+        $data[CommonFields::ID] = ['required'];
+        return $data;
     }
 }

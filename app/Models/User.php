@@ -53,6 +53,16 @@ class User extends Authenticatable
         User::CREATED_USER_TYPE,
         User::EMAIL_VERIFIED_AT,
         User::REMEMBER_TOKEN,
+
+        CommonFields::ID,
+        CommonFields::ID,
+        CommonFields::UPDATED_AT,
+        CommonFields::CREATED_AT,
+        CommonFields::DELETED_AT,
+        CommonFields::CREATED_BY,
+        CommonFields::UPDATED_BY,
+        CommonFields::DELETED_BY,
+        CommonFields::VALUE_JOIN
     ];
 
     /**
@@ -60,14 +70,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $hidden = [
         User::PASSWORD,
         User::REMEMBER_TOKEN,
+        User::EMAIL_VERIFIED_AT,
     ];
-
-    function __construct(){
-        $this->fillable = array_merge($this->fillable, CommonFields::FIELDS);
-    }
 
     /**
      * Get the attributes that should be cast.

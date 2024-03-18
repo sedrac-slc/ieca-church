@@ -14,6 +14,7 @@ final class UserData
 {
 
     private static function createUser($code, $bi): User{
+        new User();
         return new User([
             User::EMAIL => sufix_email_system(strtolower($code)),
             User::IDENTITY_CARD => $bi,

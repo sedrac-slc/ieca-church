@@ -26,13 +26,21 @@ Route::get('/dashboard', [HomeController::class, 'dashboard'])
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource(RouteNavigator::ROLES, RoleController::class);
-    Route::resource(RouteNavigator::PERMISSIONS, PermissionController::class);
+    Route::get(RouteNavigator::PERMISSIONS,[PermissionController::class, 'index'])->name(navigator(RouteNavigator::PERMISSIONS)->index);
+    Route::post(RouteNavigator::PERMISSIONS,[PermissionController::class, 'store'])->name(navigator(RouteNavigator::PERMISSIONS)->store);
+    Route::put(RouteNavigator::PERMISSIONS,[PermissionController::class, 'update'])->name(navigator(RouteNavigator::PERMISSIONS)->update);
+    Route::delete(RouteNavigator::PERMISSIONS,[PermissionController::class, 'delete'])->name(navigator(RouteNavigator::PERMISSIONS)->delete);
+
+    Route::get(RouteNavigator::ROLES,[RoleController::class, 'index'])->name(navigator(RouteNavigator::ROLES)->index);
+    Route::post(RouteNavigator::ROLES,[RoleController::class, 'store'])->name(navigator(RouteNavigator::ROLES)->store);
+    Route::put(RouteNavigator::ROLES,[RoleController::class, 'update'])->name(navigator(RouteNavigator::ROLES)->update);
+    Route::delete(RouteNavigator::ROLES,[RoleController::class, 'delete'])->name(navigator(RouteNavigator::ROLES)->delete);
 
     Route::get(RouteNavigator::USERS,[UserController::class, 'index'])->name(navigator(RouteNavigator::USERS)->index);
     Route::post(RouteNavigator::USERS,[UserController::class, 'store'])->name(navigator(RouteNavigator::USERS)->store);
     Route::put(RouteNavigator::USERS,[UserController::class, 'update'])->name(navigator(RouteNavigator::USERS)->update);
     Route::delete(RouteNavigator::USERS,[UserController::class, 'delete'])->name(navigator(RouteNavigator::USERS)->delete);
+
 });
 
 require __DIR__.'/auth.php';

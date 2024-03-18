@@ -48,7 +48,6 @@
 
 import { ref } from "vue";
 import { useForm } from '@inertiajs/vue3';
-import { Modal } from 'flowbite';
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import NavigatorLink from "@/Models/NavigatorLink";
@@ -57,11 +56,11 @@ import TheadTR from "@/Slots/TheadTR.vue";
 import TBodyTR from "@/Slots/TBodyTR.vue";
 import TableTH from "@/Components/TableTH.vue";
 import TableTD from "@/Components/TableTD.vue";
-import FormUser from "@/Components/FormUser.vue";
-import ButtonEdit from "@/Components/ButtonEdit.vue";
-import ButtonDelete from "@/Components/ButtonDelete.vue";
-import ButtonCreate from "@/Components/ButtonCreate.vue";
+import ButtonEdit from '@/Components/Buttons/ButtonEdit.vue';
+import ButtonDelete from '@/Components/Buttons/ButtonDelete.vue';
+import ButtonCreate from '@/Components/Buttons/ButtonCreate.vue';
 import ModalPersistence from "@/Slots/ModalPersistence.vue";
+import FormUser from "@/Components/Forms/FormUser.vue";
 import Operation from '@/Models/Operation';
 import Person from '@/Models/Person';
 
@@ -72,8 +71,6 @@ const title = ref(Operation.CREATE)
 const disabled = ref(false)
 const passwordVisible = ref(true)
 const modalName = ref("user-modal")
-const modalEl = document.getElementById(`${modalName.value}`)
-//const modal = new Modal(modalEl);
 
 const attribute = (form, user) => {
     form.id = user.id
@@ -109,7 +106,7 @@ const submit = () => {
            form.put(route('users.update'),{  });
         break;
         case Operation.DELETE:
-            form.delete(route('users.delete', { user: form.id}));
+            form.delete(route('users.delete'));
         break;
     }
 };

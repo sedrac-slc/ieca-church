@@ -5,7 +5,7 @@
         <span v-if="required" class="text-pink-600">*</span>
     </label>
     <input :type="type" :name="name" :id="name" :placeholder="placeholder" :required="required" :value="value" @input="$emit('update', $event.target.value)" :disabled="disabled"
-        class="bg-gray-50 border border-pink-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+        class="bg-gray-50 border border-pink-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-pink-700 dark:border-pink-600 dark:placeholder-pink-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
 </template>
 <script setup>
 defineEmits(['update']);

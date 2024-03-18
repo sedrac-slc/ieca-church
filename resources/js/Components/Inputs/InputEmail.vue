@@ -2,7 +2,7 @@
     <Input type="email" :name="name" :text="text" :icon="icon" :required="required" :disabled="disabled" :value="value" @update="$emit('update',$event)"/>
 </template>
 <script setup>
-import Input from '@/Components/Input.vue';
+import Input from './Input.vue';
 defineEmits(['update']);
 defineProps({
     value: {type: String, default(){ return ""; }},

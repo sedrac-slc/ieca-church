@@ -5,7 +5,12 @@
             maxWidth : true
         }">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <div class=" dark:border-gray-600"
+                 :class="{
+                    'flex items-center justify-between p-4 md:p-5 border-b rounded-t': true,
+                    'bg-yellow-300': Operation.EDIT == title,
+                    'bg-red-300': Operation.DELETE == title,
+                 }">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white"> {{ title }} </h3>
                     <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" :data-modal-hide="modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -17,7 +22,7 @@
                 <div class="p-4 md:p-5">
                     <form class="space-y-4" @submit.prevent="$emit('submitted')">
                         <slot />
-                        <button  type="submit" class="mt-3 px-3 py-2 text-xs font-medium text-center text-white bg-pink-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">
+                        <button  type="submit" class="mt-3 px-3 py-2 text-xs font-medium text-center text-white bg-pink-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800" :data-modal-hide="modal">
                             <i class="bx bx-check"></i>
                             <span>{{btnConfirmText}}</span>
                         </button>
@@ -28,6 +33,7 @@
     </div>
 </template>
 <script setup>
+    import Operation from "@/Models/Operation";
     defineProps({
         title: { type: String, default() { return "Adicionar" } },
         text: { type: String, default() { return "Cadastramento" } },

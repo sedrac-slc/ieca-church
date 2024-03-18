@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\Concrect\CommonFields;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -22,7 +23,17 @@ class Role extends Model
     protected $fillable = [
         Role::NAME,
         Role::DESCRIPTION,
-        Role::TYPE_SYSTEM
+        Role::TYPE_SYSTEM,
+
+        CommonFields::ID,
+        CommonFields::ID,
+        CommonFields::UPDATED_AT,
+        CommonFields::CREATED_AT,
+        CommonFields::DELETED_AT,
+        CommonFields::CREATED_BY,
+        CommonFields::UPDATED_BY,
+        CommonFields::DELETED_BY,
+        CommonFields::VALUE_JOIN
     ];
 
     public static function commonFields(){

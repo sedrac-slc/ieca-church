@@ -54,14 +54,14 @@
 
 import { usePage } from '@inertiajs/vue3';
 
-import Select from '@/Components/Select.vue';
-import InputDate from '@/Components/InputDate.vue';
-import InputText from '@/Components/InputText.vue';
-import InputEmail from '@/Components/InputEmail.vue';
-import InputPassword from '@/Components/InputPassword.vue';
+import Select from '../Inputs/Select.vue';
+import InputDate from '../Inputs/InputDate.vue';
+import InputText from '../Inputs/InputText.vue';
+import InputEmail from '../Inputs/InputEmail.vue';
+import InputPassword from '../Inputs/InputPassword.vue';
 import selects from '@/Parser/select';
 import Person from '@/Models/Person';
-import LabelError from './LabelError.vue';
+import LabelError from '../Inputs/LabelError.vue';
 
 defineProps( {
     passwordVisible: { type: Boolean, default() { return true } },

@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Post;
 
-use App\Enum\Concrect\CommonFields;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteRequest extends FormRequest
+class PermissionPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,7 +22,7 @@ class DeleteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            CommonFields::ID => ['required']
+            //
         ];
     }
 }

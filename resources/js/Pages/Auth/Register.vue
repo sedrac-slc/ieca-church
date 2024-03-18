@@ -11,8 +11,8 @@
     </main>
 </template>
 <script setup>
-import FormUser from '@/Components/FormUser.vue';
 import NavBar from '@/Components/NavBar.vue';
+import FormUser from '@/Components/Forms/FormUser.vue';
 import { useForm } from '@inertiajs/vue3';
 import Person from '@/Models/Person';
 

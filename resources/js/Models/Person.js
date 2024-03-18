@@ -1,3 +1,4 @@
+
 export default {
     id: "",
     fullname: "",
@@ -11,6 +12,7 @@ export default {
     password: "",
     password_confirmation: ""
 }
+
 /*
 export default {
     id: "",
