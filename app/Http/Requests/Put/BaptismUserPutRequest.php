@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Post;
+namespace App\Http\Requests\Put;
 
+use App\Enum\Concrect\CommonFields;
+use App\Http\Requests\Post\BaptismUserPostRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionPostRequest extends FormRequest
+class BaptismUserPutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,8 +23,9 @@ class PermissionPostRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $data = (new BaptismUserPostRequest())->rules();
+        $data[CommonFields::ID] = ['required'];
+        return $data;
     }
+
 }

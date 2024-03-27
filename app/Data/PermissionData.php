@@ -6,10 +6,12 @@ use App\Enum\Seeder\PermissionEnum;
 use App\Models\Permission;
 use Exception;
 
-class PermissionData{
+class PermissionData
+{
 
-    public static function getData($code){
-        switch($code){
+    public static function getData($code)
+    {
+        switch ($code) {
 
             case PermissionEnum::PERMISSION_VIEW:
                 return new Permission([Permission::NAME => $code, Permission::DESCRIPTION => "Visualizar permissões"]);
@@ -38,12 +40,22 @@ class PermissionData{
             case PermissionEnum::PERMISSION_USER_DELETE:
                 return new Permission([Permission::NAME => $code, Permission::DESCRIPTION => "Eliminar utilizadores"]);
 
+            case PermissionEnum::PERMISSION_BAPTISM_VIEW:
+                return new Permission([Permission::NAME => $code, Permission::DESCRIPTION => "Visualizar baptismos"]);
+            case PermissionEnum::PERMISSION_BAPTISM_CREATE:
+                return new Permission([Permission::NAME => $code, Permission::DESCRIPTION => "Criar baptismos"]);
+            case PermissionEnum::PERMISSION_BAPTISM_UPDATE:
+                return new Permission([Permission::NAME => $code, Permission::DESCRIPTION => "Editar baptismos"]);
+            case PermissionEnum::PERMISSION_BAPTISM_DELETE:
+                return new Permission([Permission::NAME => $code, Permission::DESCRIPTION => "Eliminar baptismos"]);
+
             default:
                 throw new Exception("code: {$code} not found");
         }
     }
 
-    public static function all(){
+    public static function all()
+    {
         return [
             static::getData(PermissionEnum::PERMISSION_VIEW),
             static::getData(PermissionEnum::PERMISSION_CREATE),
@@ -59,7 +71,12 @@ class PermissionData{
             static::getData(PermissionEnum::PERMISSION_USER_CREATE),
             static::getData(PermissionEnum::PERMISSION_USER_UPDATE),
             static::getData(PermissionEnum::PERMISSION_USER_DELETE),
+
+            static::getData(PermissionEnum::PERMISSION_BAPTISM_VIEW),
+            static::getData(PermissionEnum::PERMISSION_BAPTISM_CREATE),
+            static::getData(PermissionEnum::PERMISSION_BAPTISM_UPDATE),
+            static::getData(PermissionEnum::PERMISSION_BAPTISM_DELETE),
+
         ];
     }
-
 }

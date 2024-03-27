@@ -8,4 +8,6 @@ final class UserEnum{
     public const USER = "USER";
     public const ROLE = "ROLE";
     public const PERMISSION = "PERMISSION";
+    public const BAPTISM = "BAPTISM";
+
 }

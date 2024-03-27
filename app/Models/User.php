@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Notifications\Notifiable;
 use App\Enum\Concrect\CommonFields;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -96,6 +99,14 @@ class User extends Authenticatable
             'genders' => Gender::selects(),
             'maritalStatus' => MaritalStatus::selects(),
         ];
+    }
+
+    public function baptism_user():  HasOne{
+        return $this->hasOne(BaptismUser::class);
+    }
+
+    public function roles():  BelongsToMany{
+        return $this->belongsToMany(Role::class, UserRole::TABLE);
     }
 
 }

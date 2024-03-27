@@ -2,11 +2,13 @@
 
 use App\Enum\Concrect\RouteNavigator;
 use App\Http\Controllers\{
+    UserController,
     HomeController,
     RoleController,
     PermissionController,
-    UserController,
+    BaptismUserController
 };
+use Illuminate\Routing\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::put(RouteNavigator::USERS,[UserController::class, 'update'])->name(navigator(RouteNavigator::USERS)->update);
     Route::delete(RouteNavigator::USERS,[UserController::class, 'delete'])->name(navigator(RouteNavigator::USERS)->delete);
 
+    Route::get(RouteNavigator::BAPTISM,[BaptismUserController::class, 'index'])->name(navigator(RouteNavigator::BAPTISM)->index);
+    Route::post(RouteNavigator::BAPTISM,[BaptismUserController::class, 'store'])->name(navigator(RouteNavigator::BAPTISM)->store);
+    Route::put(RouteNavigator::BAPTISM,[BaptismUserController::class, 'update'])->name(navigator(RouteNavigator::BAPTISM)->update);
+    Route::delete(RouteNavigator::BAPTISM,[BaptismUserController::class, 'delete'])->name(navigator(RouteNavigator::BAPTISM)->delete);
 });
 
 require __DIR__.'/auth.php';

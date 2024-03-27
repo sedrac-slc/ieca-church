@@ -18,6 +18,8 @@ class RoleData{
                 return new Role([Role::NAME => $code, Role::DESCRIPTION => "Administrador de cargos", Role::TYPE_SYSTEM => true]);
             case RoleEnum::ROLE_PERMISSION:
                 return new Role([Role::NAME => $code, Role::DESCRIPTION => "Administrador de permissões", Role::TYPE_SYSTEM => true]);
+            case RoleEnum::ROLE_BAPTISM:
+                return new Role([Role::NAME => $code, Role::DESCRIPTION => "Administrador de baptismo", Role::TYPE_SYSTEM => true]);
             default:
                 throw new Exception("code: {$code} not found");
         }
@@ -29,6 +31,7 @@ class RoleData{
             static::getData(RoleEnum::ROLE_USER),
             static::getData(RoleEnum::ROLE_ROLE),
             static::getData(RoleEnum::ROLE_PERMISSION),
+            static::getData(RoleEnum::ROLE_BAPTISM),
         ];
     }
 

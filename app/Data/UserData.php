@@ -40,6 +40,8 @@ final class UserData
                 return static::createUser($code, "0090127TE08925");
             case UserEnum::PERMISSION:
                 return static::createUser($code, "0090127TE08926");
+            case UserEnum::BAPTISM:
+                return static::createUser($code, "0090127TE08927");
             default:
                 throw new Exception("code: {$code} not found");
         }
@@ -52,6 +54,8 @@ final class UserData
             static::getData(UserEnum::USER),
             static::getData(UserEnum::ROLE),
             static::getData(UserEnum::PERMISSION),
+            static::getData(UserEnum::BAPTISM),
         ];
     }
+
 }

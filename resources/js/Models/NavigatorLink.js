@@ -4,4 +4,5 @@ export default {
     PERMISSION: "permission",
     ROLE: "role",
     USER: "user",
+    BAPTISM: "baptism",
 }

@@ -9,7 +9,9 @@ class RouteNavigator{
 
     public const ROLES = 'roles';
     public const PERMISSIONS = 'permissions';
+    public const BAPTISM = 'baptism';
     public const USERS = 'users';
+
     public const EXCEPTION = 'exception';
 
     private string $route;
